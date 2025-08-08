@@ -206,6 +206,10 @@ const continentConfigs = {
     scale: 450,
     center: [10, 55] as [number, number],
   },
+  'Middle East': {
+    scale: 500,
+    center: [50, 30] as [number, number],
+  },
   'Africa': {
     scale: 300,
     center: [20, 0] as [number, number],

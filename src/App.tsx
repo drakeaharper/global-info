@@ -2,7 +2,7 @@ import { useState } from 'react'
 import TabNavigation from './components/TabNavigation'
 import WorldMap from './components/WorldMap'
 
-const CONTINENTS = ['World', 'Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania', 'Antarctica']
+const CONTINENTS = ['World', 'Africa', 'Asia', 'Europe', 'Middle East', 'North America', 'South America', 'Oceania', 'Antarctica']
 
 function App() {
   const [activeTab, setActiveTab] = useState('World')
