@@ -286,7 +286,20 @@ const WorldMap = ({ continent }: WorldMapProps) => {
         
         <div 
           className="w-full bg-blue-50 rounded-lg overflow-hidden"
-          onMouseMove={handleMouseMove}
+          onMouseMove={(e) => {
+            const target = e.target as any
+            // If mouse is over ocean/background (not a path element), clear tooltip
+            if (target.tagName !== 'path') {
+              setHoveredCountry(null)
+              setTooltip(null)
+            } else {
+              handleMouseMove(e)
+            }
+          }}
+          onMouseLeave={() => {
+            setHoveredCountry(null)
+            setTooltip(null)
+          }}
         >
           <ComposableMap
             projection="geoNaturalEarth1"
@@ -326,7 +339,15 @@ const WorldMap = ({ continent }: WorldMapProps) => {
                           outline: 'none',
                         },
                       }}
-                      onMouseEnter={(e) => isAvailable && handleCountryEnter(geo, e)}
+                      onMouseEnter={(e) => {
+                        if (isAvailable) {
+                          handleCountryEnter(geo, e)
+                        } else {
+                          // Clear tooltip when hovering over unavailable countries
+                          setHoveredCountry(null)
+                          setTooltip(null)
+                        }
+                      }}
                       onMouseLeave={handleCountryLeave}
                     />
                   )
