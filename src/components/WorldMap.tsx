@@ -188,12 +188,51 @@ const countryMapping: Record<string, string> = {
   '010': 'AQ',   // Antarctica
 }
 
+// Continent-specific map configurations
+const continentConfigs = {
+  'World': {
+    scale: 150,
+    center: [0, 0] as [number, number],
+  },
+  'North America': {
+    scale: 300,
+    center: [-100, 50] as [number, number],
+  },
+  'South America': {
+    scale: 300,
+    center: [-60, -15] as [number, number],
+  },
+  'Europe': {
+    scale: 450,
+    center: [10, 55] as [number, number],
+  },
+  'Africa': {
+    scale: 300,
+    center: [20, 0] as [number, number],
+  },
+  'Asia': {
+    scale: 250,
+    center: [100, 35] as [number, number],
+  },
+  'Oceania': {
+    scale: 450,
+    center: [140, -25] as [number, number],
+  },
+  'Antarctica': {
+    scale: 300,
+    center: [0, -85] as [number, number],
+  },
+}
+
 const WorldMap = ({ continent }: WorldMapProps) => {
   const [tooltip, setTooltip] = useState<TooltipData | null>(null)
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null)
 
   const countries = getCountriesByContinent(continent)
   const availableCountryIds = countries.map(c => c.id)
+  
+  // Get configuration for current continent
+  const mapConfig = continentConfigs[continent as keyof typeof continentConfigs] || continentConfigs['World']
 
   const handleCountryEnter = (geo: any, event: React.MouseEvent) => {
     const countryId = countryMapping[geo.id]
@@ -252,8 +291,8 @@ const WorldMap = ({ continent }: WorldMapProps) => {
           <ComposableMap
             projection="geoNaturalEarth1"
             projectionConfig={{
-              scale: 150,
-              center: [0, 0],
+              scale: mapConfig.scale,
+              center: mapConfig.center,
             }}
             width={1000}
             height={500}
