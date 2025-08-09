@@ -186,6 +186,22 @@ const countryMapping: Record<string, string> = {
 
   // Antarctica
   '010': 'AQ',   // Antarctica
+
+  // Missing Territories
+  '304': 'GL',   // Greenland
+  '630': 'PR',   // Puerto Rico
+  '254': 'GF',   // French Guiana
+  '238': 'FK',   // Falkland Islands
+  '580': 'MP',   // Northern Mariana Islands
+  '316': 'GU',   // Guam
+  '850': 'VI',   // US Virgin Islands
+  '092': 'VG',   // British Virgin Islands
+  '660': 'AI',   // Anguilla
+  '666': 'PM',   // Saint Pierre and Miquelon
+  '162': 'CX',   // Christmas Island
+  '166': 'CC',   // Cocos Islands
+  '574': 'NF',   // Norfolk Island
+  '334': 'HM',   // Heard & McDonald Islands
 }
 
 // Continent-specific map configurations
@@ -274,9 +290,12 @@ const WorldMap = ({ continent }: WorldMapProps) => {
   const getCountryFill = (geo: any) => {
     const countryId = countryMapping[geo.id]
     const isAvailable = countryId && availableCountryIds.includes(countryId)
-    const isHovered = countryId === hoveredCountry
+    const isHovered = (countryId === hoveredCountry) || (geo.id === hoveredCountry)
     
-    if (!isAvailable) return '#e5e7eb' // Gray for countries not in our data
+    if (!isAvailable) {
+      if (isHovered) return '#9ca3af'   // Darker gray on hover
+      return '#e5e7eb'                  // Light gray for countries without data
+    }
     if (isHovered) return '#1e40af'     // Dark blue on hover
     return '#22c55e'                    // Green for available countries
   }
@@ -346,8 +365,29 @@ const WorldMap = ({ continent }: WorldMapProps) => {
                       onMouseEnter={(e) => {
                         if (isAvailable) {
                           handleCountryEnter(geo, e)
+                        } else if (geo.properties) {
+                          // Try different common property names for country name
+                          const countryName = geo.properties.NAME || geo.properties.NAME_EN || geo.properties.ADMIN || geo.properties.name || 'Unknown Country'
+                          
+                          // Log Greenland specifically to find its ISO code
+                          if (countryName.toLowerCase().includes('greenland')) {
+                            console.log('Greenland found:', {id: geo.id, name: countryName, properties: geo.properties})
+                          }
+                          
+                          // Show just country name for grey countries
+                          setHoveredCountry(geo.id)
+                          setTooltip({
+                            country: {
+                              id: geo.id,
+                              name: countryName,
+                              population: 0, // Will show "Population data not available"
+                              continent: 'Unknown'
+                            },
+                            x: e.clientX,
+                            y: e.clientY,
+                          })
                         } else {
-                          // Clear tooltip when hovering over unavailable countries
+                          // Clear tooltip for countries without any data
                           setHoveredCountry(null)
                           setTooltip(null)
                         }

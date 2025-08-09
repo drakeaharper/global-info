@@ -17,9 +17,11 @@ const Tooltip = ({ tooltip }: TooltipProps) => {
       }}
     >
       <div className="font-semibold">{tooltip.country.name}</div>
-      <div className="text-sm text-gray-300">
-        Population: {formatPopulation(tooltip.country.population)}
-      </div>
+      {tooltip.country.population > 0 && (
+        <div className="text-sm text-gray-300">
+          Population: {formatPopulation(tooltip.country.population)}
+        </div>
+      )}
     </div>
   )
 }

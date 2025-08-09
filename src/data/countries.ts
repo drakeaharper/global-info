@@ -174,6 +174,22 @@ export const countries: Country[] = [
 
   // Antarctica (research stations)
   { id: 'AQ', name: 'Antarctica', population: 5000, continent: 'Antarctica' },
+
+  // Missing Territories and Dependencies
+  { id: 'GL', name: 'Greenland', population: 56000, continent: 'North America' },
+  { id: 'PR', name: 'Puerto Rico', population: 3200000, continent: 'North America' },
+  { id: 'GF', name: 'French Guiana', population: 300000, continent: 'South America' },
+  { id: 'FK', name: 'Falkland Islands', population: 3500, continent: 'South America' },
+  { id: 'MP', name: 'Northern Mariana Islands', population: 58000, continent: 'Oceania' },
+  { id: 'GU', name: 'Guam', population: 170000, continent: 'Oceania' },
+  { id: 'VI', name: 'US Virgin Islands', population: 105000, continent: 'North America' },
+  { id: 'VG', name: 'British Virgin Islands', population: 30000, continent: 'North America' },
+  { id: 'AI', name: 'Anguilla', population: 15000, continent: 'North America' },
+  { id: 'PM', name: 'Saint Pierre and Miquelon', population: 6000, continent: 'North America' },
+  { id: 'CX', name: 'Christmas Island', population: 2000, continent: 'Oceania' },
+  { id: 'CC', name: 'Cocos Islands', population: 600, continent: 'Oceania' },
+  { id: 'NF', name: 'Norfolk Island', population: 2000, continent: 'Oceania' },
+  { id: 'HM', name: 'Heard & McDonald Islands', population: 0, continent: 'Antarctica' },
 ]
 
 export const getCountriesByContinent = (continent: string): Country[] => {
