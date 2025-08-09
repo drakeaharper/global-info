@@ -2,13 +2,18 @@
 
 An interactive world map application built with Bun, TypeScript, React, and Tailwind CSS that helps you learn about countries and their populations.
 
+## 🚀 [Live Demo](https://drakeaharper.github.io/global-info/)
+
 ## Features
 
-- 🗺️ Interactive SVG world map with hover effects
-- 🌍 Tab navigation for World view and individual continents
-- 📊 Country population tooltips with formatted numbers
+- 🗺️ Interactive SVG world map with realistic country shapes using Natural Earth data
+- 🌍 Tab navigation for World view and individual continents (including Middle East region)
+- 📊 Country population tooltips with formatted numbers (195+ countries)
+- 🏝️ Missing territories support (Greenland, Puerto Rico, French Guiana, etc.)
+- 🔍 Continent-specific zoom views for detailed exploration
 - 🎨 Modern, responsive design with Tailwind CSS
 - ⚡ Fast development with Vite and Bun
+- 🚀 Automated deployment to GitHub Pages
 
 ## Getting Started
 
@@ -29,8 +34,10 @@ An interactive world map application built with Bun, TypeScript, React, and Tail
 - **Runtime**: Bun
 - **Language**: TypeScript
 - **Framework**: React 19
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS v3
 - **Build Tool**: Vite
+- **Maps**: react-simple-maps with Natural Earth data
+- **Deployment**: GitHub Pages with GitHub Actions
 - **Architecture**: Functional programming approach
 
 ## Project Structure
