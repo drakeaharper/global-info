@@ -3,6 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "homepage": "https://drakeaharper.github.io/global-info/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
